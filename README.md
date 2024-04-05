@@ -74,6 +74,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
   - CRP
   - Configured TailwindCSS
+  - Header
+  - Login Form
 
   # Feature
   - Login / Sign Up 
