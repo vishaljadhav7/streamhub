@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +67,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
+
+
+  # Stream gpt
+
+  - CRP
+  - Configured TailwindCSS
+
+  # Feature
+  - Login / Sign Up 
+      - Sign In / Sign Up Form
+        - redirect to Browse page
+        
+  - Browse ( after authentication)
+      - Header
+      - Main Movie
+          - Trailer in Background 
+          - Title & Description
+          - Movie Suggestions
+             - Movie Lists * N 
+   
+  - Stream gpt page
+      - Search bar
+      - Movie Suggestions              
