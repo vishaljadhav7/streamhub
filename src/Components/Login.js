@@ -1,6 +1,8 @@
 import React , {useState, useRef} from 'react'
 import Navbar from './Navbar'
 import {checkValidData} from '../utils/validate'
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from '../utils/Firebase' ;
 
 
 const Login = () => {
@@ -19,6 +21,40 @@ const Login = () => {
    const receivedMessage = checkValidData(email.current.value, password.current.value);
    // console.log(receivedMessage)
    setMessage(receivedMessage);
+   if(receivedMessage) return;
+
+   if(!isSignIn){
+    //sign up logic 
+    createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+    .then((userCredential) => {
+    // Signed up 
+     const user = userCredential.user;
+     console.log(" a new user " , user)
+    })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    setMessage(error.code + "  " + error.message );
+    });
+  }
+  else
+  { 
+    // sign in logic 
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+    .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+   })
+   .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setMessage(error.code + "-" + error.message )
+   });
+  } 
+      
+
   }
 
   const toggleSignInForm = () => {
@@ -29,11 +65,13 @@ const Login = () => {
     <div>
       <Navbar/>
       
-      <div className='absolute'>
-        <img src='/movie_bg.jpg'/>
+      <div className="absolute w-screen h-screen">
+        <img
+         className="absolute w-[100%] h-[100%] object-cover"
+        src="/Background.jpg"/>
       </div>
 
-      <form className='w-3/12  absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg'
+      <form className='w-3/12  absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg'
          onSubmit={(e)=>{e.preventDefault();}}
         >
 
