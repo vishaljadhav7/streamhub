@@ -1,61 +1,91 @@
 import React , {useState, useRef} from 'react'
 import Navbar from './Navbar'
 import {checkValidData} from '../utils/validate'
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth} from '../utils/Firebase' ;
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {addUser, removeUser} from '../utils/userSlice'
 
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [message,setMessage] = useState(null);
-
-  
+  const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
+  const navigate = useNavigate();
 
 
   const handleSubmit = () => {
     // validate the form data 
     // checkValidData(email, password)
     //  console.log(email.current.value," -------- ", password.current.value );
-   const receivedMessage = checkValidData(email.current.value, password.current.value);
-   // console.log(receivedMessage)
-   setMessage(receivedMessage);
-   if(receivedMessage) return;
-
-   if(!isSignIn){
+    const receivedMessage = checkValidData(email.current.value, password.current.value);
+    // console.log(receivedMessage)
+    setMessage(receivedMessage);
+    if(receivedMessage) return;
+ 
+    if(!isSignIn){
     //sign up logic 
-    createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-    .then((userCredential) => {
-    // Signed up 
-     const user = userCredential.user;
-     console.log(" a new user " , user)
-    })
-    .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-    setMessage(error.code + "  " + error.message );
-    });
-  }
-  else
-  { 
+      createUserWithEmailAndPassword(
+        auth, 
+        email.current.value, 
+        password.current.value
+      )
+      .then((userCredential) => {
+        // Signed up & using the updateProfile API 
+        const user = userCredential.user;
+        console.log(" a new user " , user)
+        navigate("/BrowseMenu")
+     })
+     .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        setMessage(error.code + "  " + error.message );
+      });
+    }
+    else
+    { 
     // sign in logic 
-    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-    .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-   })
-   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setMessage(error.code + "-" + error.message )
-   });
-  } 
-      
+      signInWithEmailAndPassword(
+        auth, 
+        email.current.value, 
+        password.current.value
+      )
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: name?.current?.value, photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAkon&psig=AOvVaw3NUhmShPx-GDcBbaGDqENg&ust=1712593783765000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOD14_vCsIUDFQAAAAAdAAAAABAE"
+        }).then(() => {
+          // Profile updated!
+          const {uid,email,displayName, photoURL}= auth.currentUser;
+          dispatch(
+            addUser(
+              {uid:uid ,
+              email: email, 
+              displayName: displayName, 
+              photoURL : photoURL
+            }))
+          
+          navigate("/BrowseMenu")
+        }).catch((error) => {
+          // An error occurred
+        
+        });
 
-  }
+        console.log("already registered",user)
+        
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setMessage(error.code + "-" + error.message )
+      });
+    } 
+ }
 
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
@@ -115,4 +145,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;
