@@ -1,12 +1,12 @@
-import React , {useState, useRef} from 'react'
-import Navbar from './Navbar'
-import {checkValidData} from '../utils/validate'
+import React , {useState, useRef} from 'react' ;
+import Navbar from './Navbar' ;
+import {checkValidData} from '../utils/validate';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth} from '../utils/Firebase' ;
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {addUser, removeUser} from '../utils/userSlice'
-import {USER_AVATAR}  from '../utils/constants' 
+import {addUser, removeUser} from '../utils/userSlice' ;
+import {USER_AVATAR}  from '../utils/constants' ;
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -48,13 +48,14 @@ const Login = () => {
           const {uid,email,displayName, photoURL}= auth.currentUser;
           dispatch(
             addUser(
-              {uid:uid ,
-              email: email, 
-              displayName: displayName, 
+            {
+              uid:uid ,
+              email: email , 
+              displayName: displayName , 
               photoURL : photoURL
             }))
           
-          navigate("/BrowseMenu")
+          // navigate("/BrowseMenu")
         }).catch((error) => {
           // An error occurred
         

@@ -89,6 +89,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   - fixed a bug related login i.e., if not signed / login will be re-directed to main menu & vice versa
   - unsubscribed to onAuthStateChanged callback
   - maintained hardcoded values in constansts file 
+  - registered TMDB API & create app & get access token
+  - got the data TMDB now playing movies
 
 
   # Feature
