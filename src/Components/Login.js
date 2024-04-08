@@ -14,6 +14,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
   const navigate = useNavigate();
 
 
@@ -36,8 +37,26 @@ const Login = () => {
       .then((userCredential) => {
         // Signed up & using the updateProfile API 
         const user = userCredential.user;
-        console.log(" a new user " , user)
-        navigate("/BrowseMenu")
+        // console.log(" a new user " , user)
+        updateProfile(user, {
+          displayName: name?.current?.value, photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAkon&psig=AOvVaw3NUhmShPx-GDcBbaGDqENg&ust=1712593783765000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOD14_vCsIUDFQAAAAAdAAAAABAE"
+        }).then(() => {
+          // Profile updated!
+          const {uid,email,displayName, photoURL}= auth.currentUser;
+          dispatch(
+            addUser(
+              {uid:uid ,
+              email: email, 
+              displayName: displayName, 
+              photoURL : photoURL
+            }))
+          
+          navigate("/BrowseMenu")
+        }).catch((error) => {
+          // An error occurred
+        
+        }); 
+        // navigate("/BrowseMenu")
      })
      .catch((error) => {
         const errorCode = error.code;
@@ -57,26 +76,8 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        updateProfile(user, {
-          displayName: name?.current?.value, photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAkon&psig=AOvVaw3NUhmShPx-GDcBbaGDqENg&ust=1712593783765000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOD14_vCsIUDFQAAAAAdAAAAABAE"
-        }).then(() => {
-          // Profile updated!
-          const {uid,email,displayName, photoURL}= auth.currentUser;
-          dispatch(
-            addUser(
-              {uid:uid ,
-              email: email, 
-              displayName: displayName, 
-              photoURL : photoURL
-            }))
-          
-          navigate("/BrowseMenu")
-        }).catch((error) => {
-          // An error occurred
-        
-        });
-
-        console.log("already registered",user)
+        // console.log("already registered",user)
+        // navigate("/BrowseMenu")
         
       })
       .catch((error) => {
@@ -109,7 +110,14 @@ const Login = () => {
             {isSignIn? "Sign In" : " Sign Up" }   
           </h1>
             
-          {!isSignIn && <input type='text' placeholder='Enter your name' className='p-4 my-2 w-full bg-gray-500 rounded-lg'/>}
+          {!isSignIn 
+          && 
+          <input
+          ref={name} 
+          type='text' 
+          placeholder='Enter your name' 
+          className='p-4 my-2 w-full bg-gray-500 rounded-lg'
+          />}
 
 
           <input 

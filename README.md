@@ -85,6 +85,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   - Create sign up user acc
   - implement sign in user 
   - created redux store with user slice 
+  - implemented sign out
+  - fixed a bug related login i.e., if not signed / login will be re-directed to main menu & vice versa
+
 
   # Feature
   - Login / Sign Up 
