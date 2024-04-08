@@ -6,7 +6,7 @@ import {auth} from '../utils/Firebase' ;
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {addUser, removeUser} from '../utils/userSlice'
-
+import {USER_AVATAR}  from '../utils/constants' 
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -23,8 +23,10 @@ const Login = () => {
     // checkValidData(email, password)
     //  console.log(email.current.value," -------- ", password.current.value );
     const receivedMessage = checkValidData(email.current.value, password.current.value);
+
     // console.log(receivedMessage)
     setMessage(receivedMessage);
+
     if(receivedMessage) return;
  
     if(!isSignIn){
@@ -39,7 +41,8 @@ const Login = () => {
         const user = userCredential.user;
         // console.log(" a new user " , user)
         updateProfile(user, {
-          displayName: name?.current?.value, photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAkon&psig=AOvVaw3NUhmShPx-GDcBbaGDqENg&ust=1712593783765000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOD14_vCsIUDFQAAAAAdAAAAABAE"
+          displayName: name.current.value, 
+          photoURL: USER_AVATAR,
         }).then(() => {
           // Profile updated!
           const {uid,email,displayName, photoURL}= auth.currentUser;

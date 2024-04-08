@@ -12,7 +12,7 @@ const Navbar = () => {
   const user = useSelector(store=>store.user)
    
   useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
      if (user) {
        const {uid,email,displayName, photoURL} = user;
        dispatch(
@@ -30,13 +30,13 @@ const Navbar = () => {
      }
    });
 
+   return () => {
+         unsubscribe(); // unsubscribe happens when component unmounts
+   }
+
   }, []) // using this useEffect both inside router as well as central place 
 
-
-
-
-
-  const handleSignOut = () =>{
+   const handleSignOut = () =>{
   
       signOut(auth).then(() => {
        // Sign-out successful.

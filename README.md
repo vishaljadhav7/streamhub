@@ -87,6 +87,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   - created redux store with user slice 
   - implemented sign out
   - fixed a bug related login i.e., if not signed / login will be re-directed to main menu & vice versa
+  - unsubscribed to onAuthStateChanged callback
+  - maintained hardcoded values in constansts file 
 
 
   # Feature
