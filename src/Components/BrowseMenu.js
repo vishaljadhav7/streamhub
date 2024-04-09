@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react'
 import Navbar from './Navbar'
-import { API_OPTIONS } from '../utils/constants'
+import useThoseNowPlayingMovies from '../hooks/useThoseNowPlayingMovies'
+import MainContainer from './MainContainer';
+import MoveListsContainer from './MoveListsContainer';
 
 const BrowseMenu = () => {
-
-  const getThoseNowPlaying = async () => {
-    const data = await fetch(
-      'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', 
-    API_OPTIONS
-    );
-    const json = await data.json();
-    console.log("getThoseNowPlaying   ", json.results);
-  }
-
-  useEffect(()=>{
-    getThoseNowPlaying();
-  }, [])
+  useThoseNowPlayingMovies();
 
   return (
     <div>
       <Navbar/>
+       <MainContainer/>
+       <MoveListsContainer/>
+      {/* {
+        Dividing the whole browse page into two sections
+          - MainContainer 
+              - VideoBackground
+              - Video Title
+          - MovieListsConTainer
+              - MovieLists * n
+                 - Cards * n     
+
+      } */}
     </div>
   )
 }
