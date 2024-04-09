@@ -91,6 +91,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   - maintained hardcoded values in constansts file 
   - registered TMDB API & create app & get access token
   - got the data TMDB now playing movies
+  - custom hook for now playing movies
+  - created allMoviesSlice
+  - update store with movies data 
+  - fetch data for trailer video
+  - updated store with trailer video data
+  - Embedded the youtube video 
+
 
 
   # Feature
