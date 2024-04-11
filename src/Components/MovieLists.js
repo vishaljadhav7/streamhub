@@ -4,15 +4,13 @@ const MovieLists = ({title, movies}) => {
     if(!movies) return ;
     console.log("from movielists  ", movies)
   return (
-    <div className='flex overflow-x-scroll '>
-        <div >
-            <h1>
-                {title}
-            </h1>
+    <div className='px-6  text-white'>
+        <h1 className='text-2xl py-4'>{title} </h1>
+        <div className='flex overflow-x-scroll'>
+            <div className='flex gap-2'>
+            {movies.map(movie => <MovieCard poster_path={movie.poster_path} key={movie.id}/>)}
         </div>
-        <div className='flex gap-2'>
-        {movies.map(movie => <MovieCard poster_path={movie.poster_path} key={movie.id}/>)}
-        </div>
+      </div>
        
     </div>
   )
