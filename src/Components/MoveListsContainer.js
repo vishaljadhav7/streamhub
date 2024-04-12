@@ -5,11 +5,12 @@ const MoveListsContainer = () => {
   const movies = useSelector(store=>store.movies)
   //  console.log("djnanwv  ", movies.popularMovies);
   return (
-    <div className='bg-black'>
+    <div className='bg-black w-screen'>
       <div className='-mt-28 relative z-20'> 
-      <MovieLists title={"Now Playing Movies"} movies={movies.nowPlayingMovies} className="bg-transparent"/>
-      <MovieLists title={"Popular"} movies={movies.popularMovies}/>
+      <MovieLists title={"Now Playing Movies"} movies={movies.nowPlayingMovies}/>
       <MovieLists title={"Top Rated Movies"} movies={movies.topRatedMovies}/>
+      <MovieLists title={"Popular"} movies={movies.popularMovies}/>
+
       </div>
     </div>
 
