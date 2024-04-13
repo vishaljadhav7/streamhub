@@ -6,7 +6,7 @@ import useThosePopularMovies from '../hooks/useThosePopularMovies';
 import useThoseTopRatedMovies from '../hooks/useThoseTopRatedMovies';
 import { useSelector } from 'react-redux';
 // import useThoseUpcomingMovies from '../hooks/useThoseUpcomingMovies';
-import GptTurbo from './GptTurbo'
+import GeminiPro from './GeminiPro';
 
 
 const BrowseMenu = () => {
@@ -14,13 +14,13 @@ const BrowseMenu = () => {
   useThosePopularMovies();
   useThoseTopRatedMovies();
   // useThoseUpcomingMovies(); 
-  const gptSearchView = useSelector(store => store.gpt.showGptSearch)
+  const geminiSearchView = useSelector(store => store.gemini.showGeminiSearch)
 
   return (
     <div>
       <Navbar/>
 
-      {gptSearchView ? <GptTurbo/> :
+      {geminiSearchView ? <GeminiPro/> :
         <>
          <MainContainer/>
          <MoveListsContainer/>  
