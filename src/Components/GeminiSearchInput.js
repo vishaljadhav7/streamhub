@@ -41,8 +41,8 @@ const GeminiSearchInput = () => {
 
 
   return (
-    <div className='pt-[16%] flex justify-center' onSubmit={(e)=>e.preventDefault()}>
-        <form className=' w-1/2 bg-black grid grid-cols-12 '>
+    <div className='pt-[40%] flex justify-center md:pt-[14%]' onSubmit={(e)=>e.preventDefault()}>
+        <form className='w-full md:w-1/2 bg-black grid grid-cols-12 '>
             <input 
               ref={searchQuery}
               type='text' 
@@ -50,7 +50,7 @@ const GeminiSearchInput = () => {
               className='p-4 m-4 col-span-9 '
             />
             <button 
-            className ='col-span-3 text-white  bg-red-500 py-5 px-4 m-4 rounded-lg'
+            className ='col-span-3 text-white  bg-red-500 py-5 px-4 m-4 rounded-lg '
             onClick={handleGeminiSearch}
             >{lang[toggledLanguage].search}</button>
         </form>

@@ -7,7 +7,7 @@ const GeminiPro = () => {
     <div>
        <div className="absolute w-screen h-screen -z-30">
         <img
-         className="absolute w-[100%] h-screen object-cover"
+         className="absolute w-[100%]  object-cover h-full"
         src="/Background.jpg"/>
       </div>
 

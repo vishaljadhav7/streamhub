@@ -62,15 +62,15 @@ const Navbar = () => {
   
   return (
     <div
-    className='absolute px-2 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between '
+    className='absolute px-2 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between flex-col md:flex-row '
     >
        <img
-         className='h-[60px] w-[180px] object-cover rounded-lg' 
+         className='h-[60px] w-[180px] object-cover rounded-lg mx-auto md:mx-0' 
          src="/Nav_logo.jpg" 
          alt='logo'
        />
        {user && 
-        <div className='mr-4 p-1 flex p-1'>
+        <div className='mr-4 p-1 flex  justify-center md:justify-normal'>
            { geminiSeachView ?  <select className='p-2 m-2  text-white rounded-lg bg-gray-800'  onChange={handleLanguageChange}>
              {SUPPORTED_LANGUAGES.map(lang=>
               <option key={lang.identifier} value={lang.identifier}>
