@@ -66,7 +66,7 @@ const Navbar = () => {
     >
        <img
          className='h-[60px] w-[180px] object-cover rounded-lg mx-auto md:mx-0' 
-         src="/Nav_logo.jpg" 
+         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" 
          alt='logo'
        />
        {user && 
@@ -79,16 +79,16 @@ const Navbar = () => {
            </select>  : " "   }
           
 
-          <button className='text-white py-2 px-4 m-2 bg-fuchsia-600 rounded-lg'
+          <button className='text-white py-2 px-4 m-2 bg-fuchsia-600 rounded-lg opacity-80  font-semibold'
           onClick={toggleGptSearch}
           >
            {geminiSeachView ? "Home Page" : "Gemini Search" }
           </button>
           <div className='ml-6'>
-          <img className='w-8 ml-4' src='/user.png'/>
+          <img className='w-8 ml-4 opacity-80' src='/user.png'/>
            <button
            onClick={handleSignOut} 
-           className='text-teal-500  font-semibold'
+           className='text-teal-500  font-semibold '
            >
              Sign Out
            </button>
