@@ -5,7 +5,7 @@ const MovieCard = ({poster_path}) => {
  if(!poster_path) return ;   
 
   return (
-    <div className='w-36 md:w-48 pr-3 '>
+    <div className='w-32 md:w-40 pr-3 '>
         <img   alt="Movie Card" src={IMG_CDN_URL+poster_path}/>
     </div>
   )
