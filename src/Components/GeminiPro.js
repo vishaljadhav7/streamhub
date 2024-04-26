@@ -4,8 +4,8 @@ import GeminiSuggestions from './GeminiSuggestions'
 
 const GeminiPro = () => {
   return (
-    <div>
-       <div className="absolute w-screen h-screen -z-30">
+    <div className=''>
+       <div className="absolute w-screen  -z-30 h-screen ">
         <img
          className="absolute w-[100%]  object-cover h-full"
         src="/Background.jpg"/>
