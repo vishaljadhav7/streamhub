@@ -4,13 +4,7 @@ import GeminiSuggestions from './GeminiSuggestions'
 
 const GeminiPro = () => {
   return (
-    <div className=''>
-       <div className="absolute w-screen  -z-30 h-screen ">
-        <img
-         className="absolute w-[100%]  object-cover h-full"
-        src="/Background.jpg"/>
-      </div>
-
+    <div className='bg-gradient-to-r from-rose-100 to-indigo-600 h-screen'>
       <GeminiSearchInput/>
       <GeminiSuggestions/>
     </div>
