@@ -9,7 +9,7 @@ const MoveListsContainer = () => {
 
   //  console.log("djnanwv  ", movies.popularMovies);
   return (
-    <div className='bg-black w-screen'>
+    <div className='bg-black w-screen '>
       <div className=' mt-0 md:-mt-28 relative z-20'> 
 
       <MovieLists title={"Now Playing Movies"} movies={movies.nowPlayingMovies}/>
