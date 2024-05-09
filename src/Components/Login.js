@@ -106,7 +106,7 @@ const Login = () => {
         src="/Background.jpg"/>
       </div>
 
-      <form className='w-3/12  absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg'
+      <form className='md:w-3/12  absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg'
          onSubmit={(e)=>{e.preventDefault();}}
         >
 
