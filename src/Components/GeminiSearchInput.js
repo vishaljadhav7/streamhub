@@ -33,7 +33,7 @@ const GeminiSearchInput = () => {
     
     const tmdbMovies = await Promise.all(promisesArray);
 
-    console.log("tmdbMovies ", tmdbMovies)
+    // console.log("tmdbMovies ", tmdbMovies)
     
     dispatch(addGeminiMovieResults( {movieNames: allMovies , movieResults : tmdbMovies} ));
 
