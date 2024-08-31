@@ -1,12 +1,13 @@
 import React , {useState, useRef} from 'react' ;
 import Navbar from './Navbar' ;
-import {checkValidData} from '../utils/validate';
+import {checkValidData} from '../Utils/validate';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
-import {auth} from '../utils/Firebase' ;
+import {auth} from '../Utils/Firebase' ;
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {addUser, removeUser} from '../utils/userSlice' ;
-import {USER_AVATAR}  from '../utils/constants' ;
+import {addUser, removeUser} from '../Utils/userSlice' ;
+import {USER_AVATAR}  from '../Utils/constants' ;
+import  {SIGN_IN_IMG_CDN} from '../Utils/constants'
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -63,8 +64,8 @@ const Login = () => {
         // navigate("/BrowseMenu")
      })
      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
         // ..
         setMessage(error.code + "  " + error.message );
       });
@@ -79,14 +80,14 @@ const Login = () => {
       )
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // console.log("already registered",user)
         // navigate("/BrowseMenu")
         
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
         setMessage(error.code + "-" + error.message )
       });
     } 
@@ -103,7 +104,7 @@ const Login = () => {
       <div className="absolute w-screen h-screen">
         <img
          className="absolute w-[100%] h-[100%] object-cover"
-        src="/Background.jpg"/>
+        src={SIGN_IN_IMG_CDN} alt='logo'/>
       </div>
 
       <form className='md:w-3/12  absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg'
@@ -140,7 +141,7 @@ const Login = () => {
              
           <p className="text-red-500 font-bold text-lg py-2">{message}</p>  
 
-          <button className='p-4 my-6 bg-red-700 w-full rounded-lg'
+          <button className='p-4 my-1 bg-red-700 w-full rounded-lg'
             onClick={handleSubmit}
           >
           {isSignIn? "Sign In" : " Sign Up" }

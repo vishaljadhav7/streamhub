@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import MovieLists from './MovieLists'
+import List from './List'
 
 const GeminiSuggestions = () => {
   const gemini = useSelector(store => store.gemini);
@@ -15,7 +15,7 @@ const GeminiSuggestions = () => {
     <div className='mt-4 p-4 bg-black text-white bg-opacity-90 '>
        <div className=''>
          {movieNames.map((movieName,index)=>(
-          <MovieLists
+          <List
            key={movieName}
            title={movieName}
            movies={movieResults[index]}

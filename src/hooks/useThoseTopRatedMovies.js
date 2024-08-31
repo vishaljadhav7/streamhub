@@ -1,9 +1,7 @@
-
-
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants"
+import { API_OPTIONS } from "../Utils/constants"
 import { useDispatch , useSelector } from "react-redux";
-import { addTopRatedMovies } from "../utils/allMoviesSlice";
+import { addTopRatedMovies } from "../Utils/allMoviesNSeriesSlice";
 
 
 
@@ -19,13 +17,10 @@ const useThoseTopRatedMovies = () => {
 
   useEffect(()=>{
     if(!topRatedMovies) getThoseTopRatedMovies(); 
-    // !topRatedMovies && getThoseTopRatedMovies()  
+
   },[])
 
 }
 
 
 export default useThoseTopRatedMovies ;
-
-
-// https://api.themoviedb.org/3/movie/upcoming

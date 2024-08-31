@@ -1,15 +1,13 @@
 import React, {useRef} from 'react'
-import lang from '../utils/multiLanguageConstants'
-import {  useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // import { GoogleGenerativeAI } from "@google/generative-ai";
-import { API_OPTIONS} from '../utils/constants'
-import useGeminiAI from '../hooks/useGeminiAI'
-import {addGeminiMovieResults} from '../utils/geminiSlice'
+import { API_OPTIONS} from '../Utils/constants'
+import UseGeminiAI from '../hooks/useGeminiAI'
+import {addGeminiMovieResults} from '../Utils/geminiSlice';
 
 
 const GeminiSearchInput = () => {
   const dispatch = useDispatch();
-  const toggledLanguage = useSelector(store => store.config.lang)
   const searchQuery = useRef(null);
 
   const searchMovieTMDB = async (movie) =>{
@@ -26,7 +24,7 @@ const GeminiSearchInput = () => {
     const geminiSearchQuery = "Act as a Movie Recommendation system and suggest some movies for the query : " + searchQuery.current.value + ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
     
     
-    const geminiResults = await useGeminiAI(geminiSearchQuery);
+    const geminiResults = await UseGeminiAI(geminiSearchQuery);
     const allMovies = geminiResults.split(",");
    
     const promisesArray = allMovies.map(movie => searchMovieTMDB(movie));
@@ -46,13 +44,13 @@ const GeminiSearchInput = () => {
             <input 
               ref={searchQuery}
               type='text' 
-              placeholder={lang[toggledLanguage].gptSearchPlaceHolder}
+              placeholder='What are you in the mood to watch?'
               className='p-4 m-4 col-span-9 '
             />
             <button 
             className ='col-span-3 text-white  bg-red-500 py-5 px-4 m-4 rounded-lg '
             onClick={handleGeminiSearch}
-            >{lang[toggledLanguage].search}</button>
+            >Search</button>
         </form>
     </div>
   )

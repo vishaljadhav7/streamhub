@@ -1,103 +1,92 @@
-import React, {useEffect} from 'react'
-import { SUPPORTED_LANGUAGES } from '../utils/constants';
-import {auth} from '../utils/Firebase';
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { auth } from '../Utils/Firebase';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {onAuthStateChanged, signOut} from 'firebase/auth';
-import { addUser, removeUser } from '../utils/userSlice';
-import { toggleGeminiSeachView } from '../utils/geminiSlice';
-import { changeLanguage } from '../utils/configSlice';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { addUser, removeUser } from '../Utils/userSlice';
+import { navItems } from '../Utils/constants';
+import { SiGooglegemini } from "react-icons/si";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMdClose } from "react-icons/io";
+import NavLinks from './NavLinks';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector(store=>store.user)
-  const geminiSeachView = useSelector(store => store.gemini.showGeminiSearch)
-  
-   
-  useEffect(()=>{
+  const user = useSelector((store) => store.user);
+  const [toggleNav, setToggleNav] = useState(false);
+
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-     if (user) {
-       const {uid,email,displayName, photoURL} = user;
-       dispatch(
-         addUser(
-           {uid:uid ,
-           email: email, 
-           displayName: displayName, 
-           photoURL : photoURL
-         }));
-       navigate("/BrowseMenu") 
-     } else {
-       // User is signed out
-       dispatch(removeUser());
-       navigate("/") 
-     }
-   });
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/BrowseMenu");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
 
-   return () => {
-         unsubscribe(); // unsubscribe happens when component unmounts
-   }
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch, navigate]);
 
-  }, []) // using this useEffect both inside router as well as central place 
-
-   const handleSignOut = () =>{
-  
-      signOut(auth).then(() => {
-       // Sign-out successful.
-      //  navigate("/")
-      }).catch((error) => {
-       // An error happened.
-       navigate("/error");
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        navigate("/error");
       });
-  }
+  };
 
-  const toggleGptSearch = () =>{
-    dispatch(toggleGeminiSeachView());
-  }
-
-  const handleLanguageChange =(event)=>{
-    //  console.log("sdvsfcsdzcds   " , event.target.value)
-    dispatch(changeLanguage(event.target.value))
-  }
-  
   return (
     <div
-    className='absolute px-2 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between flex-col md:flex-row '
+      className="h-20 absolute px-4 bg-purple-400 backdrop-blur-lg z-10 w-screen flex items-center justify-between"
     >
-       <img
-         className='h-[60px] w-[180px] object-cover rounded-lg mx-auto md:mx-0' 
-         src= "/nav_logo.png" 
-         alt='logo'
-       />
-       {user && 
-        <div className='mr-4 p-1 flex  justify-center md:justify-normal'>
-           { geminiSeachView ?  <select className='p-2 m-2  text-white rounded-lg bg-gray-800'  onChange={handleLanguageChange}>
-             {SUPPORTED_LANGUAGES.map(lang=>
-              <option key={lang.identifier} value={lang.identifier}>
-              {lang.name}
-             </option>)}
-           </select>  : " "   }
-          
+      <img
+        className="h-[60px] w-[180px] object-cover rounded-lg"
+        src="/nav_logo.png"
+        alt="logo"
+      />
 
-          <button className='text-white py-2 px-4 m-2 bg-fuchsia-600 rounded-lg opacity-80  font-semibold'
-          onClick={toggleGptSearch}
+      {user && (
+        <>
+          <NavLinks
+            handleSignOut={handleSignOut}
+            navStyle="invisible md:visible flex items-center mr-5 px-2"
+            buttonStyle="text-white py-2 px-4 m-2 bg-fuchsia-600 rounded-lg opacity-80 font-semibold"
+          />
+
+          <button
+            className="inline-block md:hidden mr-5 text-white text-3xl"
+            onClick={() => setToggleNav((prev) => !prev)}
           >
-           {geminiSeachView ? "Home Page" : "Gemini Search" }
+            {toggleNav ? <IoMdClose /> : <RxHamburgerMenu />}
           </button>
-          <div className='ml-6'>
-          <img className='w-8 ml-4 opacity-80' src='/user.png'/>
-           <button
-           onClick={handleSignOut} 
-           className='text-teal-500  font-semibold '
-           >
-             Sign Out
-           </button>
-          </div>
-       </div>
-       }
-    </div>
- 
-  )
-}
 
-export default Navbar
+          {toggleNav && (
+            <NavLinks
+              toggleNavSideBar={() => setToggleNav(false)}
+              handleSignOut={handleSignOut}
+              navStyle="absolute top-[100%] w-screen bg-gray-900 bg-opacity-95 backdrop-blur-md visible md:invisible flex-col justify-center -ml-4"
+              buttonStyle="text-white py-2 px-4 m-1 w-full font-semibold hover:bg-violet-600"
+            />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Navbar;

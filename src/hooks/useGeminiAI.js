@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINI_AI_KEY } from "../utils/constants";
+import { GEMINI_AI_KEY } from "../Utils/constants";
 
-const useGeminiAI = async (geminiSearchQuery) => {
+const UseGeminiAI = async (geminiSearchQuery) => {
     const genAI = new GoogleGenerativeAI(GEMINI_AI_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     const result = await model.generateContent(geminiSearchQuery);
@@ -10,4 +10,4 @@ const useGeminiAI = async (geminiSearchQuery) => {
     return text ;
 }
 
-export default useGeminiAI ;
+export default UseGeminiAI ;

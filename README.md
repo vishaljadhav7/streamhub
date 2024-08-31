@@ -92,7 +92,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   - registered TMDB API & create app & get access token
   - got the data TMDB now playing movies
   - custom hook for now playing movies
-  - created allMoviesSlice
+  - created allMoviesNSeriesSlice
   - update store with movies data 
   - fetch data for trailer video
   - updated store with trailer video data
